@@ -1,4 +1,4 @@
-# single event actions
+# actions to be performed on a single event
 def send_alert(event):
     print('    send_alert :', event)
 
@@ -7,7 +7,7 @@ def print_event(event):
     print('    print_event: ', event)
 
 
-# multi event actions
+# actions to be performed on a list of events
 def send_alerts(events):
     for event in events:
         send_alert(event)
