@@ -1,3 +1,4 @@
+import os
 import json
 # our framework
 from simpleevent.dispatcher import dispatcher
@@ -13,8 +14,8 @@ def input_reader(filepath):
 
 
 if __name__ == '__main__':
-
-    input_records = input_reader('./simpleevent/input.json')
+    dir = os.path.dirname(__file__)
+    input_records = input_reader(os.path.join(dir, 'input.json'))
 
 
     condition_action_map = [
@@ -23,6 +24,7 @@ if __name__ == '__main__':
                                                            action.print_events])
     ]
     
+
     for record in input_records:
         print('-'*10)
         print('New record: ', record)
