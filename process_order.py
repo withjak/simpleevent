@@ -4,7 +4,7 @@ import json
 from simpleevent.dispatcher import dispatcher
 from simpleevent import condition, action
 # user defination of event
-from event import Event
+from event import OrderEvent
 
 
 def input_reader(filepath):
@@ -17,12 +17,6 @@ def input_reader(filepath):
 
 if __name__ == '__main__':
 
-    # user defining what actions to take when a condition is met.
-    condition_action_map = [
-        (condition.Check('location', 'Pune'), [action.send_alert]),
-        (condition.MatchCount('location', 'Banglore', 2), [action.send_alerts, action.print_events])
-    ]
-    
     # reading input from file
     dir = os.path.dirname(__file__)
     input_records = input_reader(os.path.join(dir, 'input.json'))
@@ -31,4 +25,4 @@ if __name__ == '__main__':
     for record in input_records:
         print('-'*10)
         print('New record: ', record)
-        dispatcher(Event(**record), condition_action_map)
+        dispatcher(OrderEvent(**record))

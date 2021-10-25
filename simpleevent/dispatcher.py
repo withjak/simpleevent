@@ -5,7 +5,7 @@ from .condition_base import SingleEventCondition, MultiEventCondition
 # this is just to demonstrate the idea of a dispatcher
 event_log = []
 
-def dispatcher(event, condition_action_map):
+def dispatcher(event):
     '''
     Checks which single event condition evaluates to True for this event.
     Also checks which multi event conditions evaluates to True considering 
@@ -13,7 +13,8 @@ def dispatcher(event, condition_action_map):
     '''
     event_log.append(event)
 
-    for condn, actions in condition_action_map:
+    for condn, actions in event.condn_actn_mapping:
+
         if isinstance(condn, SingleEventCondition):
             if condn.evaluate(event):
                 take_action(event, actions)
