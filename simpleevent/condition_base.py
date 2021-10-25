@@ -2,7 +2,7 @@ from functools import wraps
 import inspect
 from abc import ABC, abstractmethod
 
-def recorder(method):
+def monitor(method):
     
     @wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -19,6 +19,8 @@ class mytype(type):
     def __call__(cls, *args, **kwargs):
         cls_obj_obj = super().__call__(*args, **kwargs)
         
+        # track if multi event condition has already been stasfyied
+        # to avaoid triggering again and again on recieveing new events.
         cls_obj_obj.already_occured = False
         
         if cls_obj_obj in cls.instances:
@@ -28,6 +30,8 @@ class mytype(type):
         return cls_obj_obj
 
 class MultiEventCondition(metaclass=mytype):
+    '''Base class for all conditions evaluating a group of events.
+    '''
     instances = []
     
     def __eq__(self, other):
@@ -43,12 +47,14 @@ class MultiEventCondition(metaclass=mytype):
         
         evaluate_method = getattr(cls, 'evaluate', None)
         if evaluate_method:
-            setattr(cls, 'evaluate', recorder(evaluate_method))
+            setattr(cls, 'evaluate', monitor(evaluate_method))
         else:
             raise NotImplementedError(f'Expected method: evaluate(self, events)')
 
 
 class SingleEventCondition(ABC):
+    '''Base class for all condition dealing with evaluating single event.
+    '''
     @abstractmethod
     def evaluate(self, event):
         pass
