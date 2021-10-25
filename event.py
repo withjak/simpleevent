@@ -1,18 +1,14 @@
 # user defined Event 
+from simpleevent import condition as condn
+from simpleevent import action as actn
+from simpleevent.rules import rules
 
 
-class Event:
-    valid_actions = ('purchase', 'order_return')
-
+@rules(mapping = [
+    (condn.Check('location', 'Pune'), [actn.send_alert]),
+    (condn.MatchCount('location', 'Banglore', 2), [actn.send_alerts, actn.print_events])])
+class OrderEvent():
     def __init__(self, user, action, location):
-        # basic checks
-        if not isinstance(user, str):
-            raise TypeError(f'Expected user of type str instead got {type(user)}')
-        if action not in self.valid_actions:
-            raise ValueError(f'action must be in {self.valid_actions!r}')
-        if not isinstance(location, str):
-            raise TypeError(f'Expected location of type str instead got {type(location)}')
-        
         self.user = user
         self.action = action
         self.location = location
