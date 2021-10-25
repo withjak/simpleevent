@@ -1,8 +1,10 @@
+# user defined Event 
+
+
 class Event:
     valid_actions = ('purchase', 'order_return')
 
     def __init__(self, user, action, location):
-
         # basic checks
         if not isinstance(user, str):
             raise TypeError(f'Expected user of type str instead got {type(user)}')
