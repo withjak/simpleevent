@@ -1,0 +1,11 @@
+[
+    {"user": "Swym", "action": "purchase", "location": "Pune"},
+    {"user": "Aksh", "action": "purchase", "location": "Banglore"},
+    {"user": "Swym", "action": "purchase", "location": "Pune"},
+    {"user": "Aksh", "action": "order_return", "location": "Banglore"},
+    {"user": "Swym", "action": "purchase", "location": "Delhi"},
+    {"user": "Swym", "action": "purchase", "location": "Delhi"},
+    {"user": "Swym", "action": "purchase", "location": "Banglore"},
+    {"user": "Swym2", "action": "purchase", "location": "Pune"},
+    {"user": "Swym2", "action": "purchase", "location": "Pune"}
+]
