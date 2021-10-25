@@ -28,7 +28,3 @@ class MatchCount(MultiEventCondition):
             return matching_events
         
         return []
-
-
-
-
